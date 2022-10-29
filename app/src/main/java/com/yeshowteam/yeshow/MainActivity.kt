@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
@@ -18,7 +20,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import com.yeshowteam.yeshow.ui.theme.YeshowTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +51,6 @@ fun MyApp(content: @Composable () -> Unit) {
                         .height(56.dp)
                         ) {
                     Row(
-
                         modifier = Modifier
                             .fillMaxHeight()
                             .padding(horizontal = 24.dp)
@@ -86,7 +90,50 @@ fun MyApp(content: @Composable () -> Unit) {
 @Preview
 @Composable
 fun MainContent() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Hello")
+    Surface(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()){
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(horizontal = 24.dp)
+                .fillMaxWidth(),
+            Arrangement.SpaceBetween,
+        ) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(26.dp)) {
+                item {
+                    RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
+                    RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
+                    RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
+                    RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun dpToSp(dp: Dp) = with(LocalDensity.current) { dp.toSp() }
+
+@Composable
+fun RestaurantCard(restaurantTitle:String,category:String,grade:Float) {
+    Row(         modifier = Modifier
+        .fillMaxWidth(1f)
+        .height(96.dp),
+        Arrangement.SpaceBetween) {
+        Column(){
+            Text(text=category, fontSize = dpToSp(14.dp), color = Color.Black, fontWeight = FontWeight.SemiBold)
+            Spacer(modifier = Modifier.height(7.dp))
+            Text(text=restaurantTitle, fontSize = dpToSp(20.dp), color = Color.Black, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(7.dp))
+            Text(text=grade.toString(), fontSize = dpToSp(15.dp), color = Color.Black, fontWeight = FontWeight.Medium)
+        }
+        Row(
+            Modifier
+                .background(color = Color.Black)
+                .size(96.dp)){
+
+        }
     }
 }
