@@ -3,7 +3,6 @@ package com.yeshowteam.yeshow.ui.theme
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -13,8 +12,6 @@ import androidx.core.view.WindowCompat
 
 private val DarkColorPalette = lightColors(
         primary = White,
-        primaryVariant = Purple700,
-        secondary = Teal200
 )
 
 
