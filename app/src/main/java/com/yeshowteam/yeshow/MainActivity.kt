@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
@@ -18,11 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.Restaurant
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -35,10 +33,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-         MyApp {
-             MainContent()
-         }
-         }
+             MyApp {
+                 MainContent()
+             }
+        }
     }
 }
 
@@ -47,10 +45,8 @@ fun MyApp(content: @Composable () -> Unit) {
     YeshowTheme {
         Scaffold(
             topBar = {
-
                 Column (
                     horizontalAlignment = Alignment.CenterHorizontally,
-
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp)
@@ -62,14 +58,11 @@ fun MyApp(content: @Composable () -> Unit) {
                             .fillMaxWidth(),
                         Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
-
                     )
                     {
                         val image: Painter = painterResource(id = R.drawable.logo)
                         Image(painter = image, contentDescription = "hello", modifier = Modifier.height(20.dp))
-                        Row(
-
-                        ) {
+                        Row {
                             IconButton(onClick = { /*TODO*/ }, modifier = Modifier.size(24.dp)) {
                                 Icon(Icons.Rounded.Search, contentDescription = "Localized description", tint = Color.Black)
                             }
@@ -80,11 +73,7 @@ fun MyApp(content: @Composable () -> Unit) {
                             }
                         }
                     }
-
                 }
-
-
-
             },
         ) {
             content()
@@ -103,7 +92,6 @@ fun MainContent() {
                 .fillMaxHeight()
                 .padding(horizontal = 24.dp)
                 .fillMaxWidth(),
-       
         ) {
             Spacer(modifier = Modifier.height(40.dp))
             Text(text = "우리 동네 인기 식당 TOP 3", fontSize = dpToSp(dp = 22.dp), color = TextColor, fontWeight = FontWeight.SemiBold)
@@ -114,12 +102,10 @@ fun MainContent() {
             ))
             Spacer(modifier = Modifier.height(34.dp))
             Column(  verticalArrangement = Arrangement.spacedBy(26.dp)) {
-
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
-
             }
         }
     }
@@ -134,25 +120,22 @@ fun RestaurantCard(restaurantTitle:String,category:String,grade:Float) {
         .fillMaxWidth(1f)
         .height(96.dp),
         Arrangement.SpaceBetween) {
-        Column(){
+        Column {
             Text(text=category, fontSize = dpToSp(14.dp), color = TextSub, fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(7.dp))
             Text(text=restaurantTitle, fontSize = dpToSp(20.dp), color = TextColor, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(7.dp))
             Row(
-
                 verticalAlignment = Alignment.CenterVertically){
-                Icon(painter = painterResource(id = R.drawable.ic_restaurant), contentDescription = "Localized description", tint = PrimaryColor, modifier = Modifier.size(18.dp))
+                Icon(Icons.Rounded.Restaurant, contentDescription = "Localized description", tint = PrimaryColor, modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text="${grade.toString()}/5.0점", fontSize = dpToSp(15.dp), color = PrimaryColor, fontWeight = FontWeight.Medium)
+                Text(text="${grade}/5.0점", fontSize = dpToSp(15.dp), color = PrimaryColor, fontWeight = FontWeight.Medium)
             }
-
         }
         Row(
             Modifier
                 .background(color = Color.Black)
                 .size(96.dp)){
-
         }
     }
 }
