@@ -1,11 +1,13 @@
 package com.yeshowteam.yeshow
 
 import android.os.Bundle
+import android.view.View.OnClickListener
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
@@ -39,6 +41,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun MyApp(content: @Composable () -> Unit) {
@@ -105,6 +108,30 @@ fun MainContent() {
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
+            }
+            Spacer(modifier = Modifier.height(40.dp))
+            Text(text = "내 재 주변 식ㅜ벼", fontSize = dpToSp(dp = 22.dp), color = TextColor, fontWeight = FontWeight.SemiBold)
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "뭘 먹을지 모르겠다고요? \n" +
+                    "지금 가장 핫한 식당을 살펴보세요!", fontSize = dpToSp(dp = 16.dp), color = TextSub, fontWeight = FontWeight.Medium, lineHeight = dpToSp(
+                dp = 22.dp
+            ))
+            Spacer(modifier = Modifier.height(21.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .height(80.dp),
+                Arrangement.SpaceBetween
+            ) {
+                CategoryButton(categoryName = "일식", onclick = {})
+                CategoryButton(categoryName = "일식", onclick = {})
+                CategoryButton(categoryName = "일식", onclick = {})
+                CategoryButton(categoryName = "일식", onclick = {})
+            }
+            Spacer(modifier = Modifier.height(34.dp))
+            Column(  verticalArrangement = Arrangement.spacedBy(26.dp)) {
+                RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
+                RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
                 RestaurantCard(restaurantTitle = "이자와 숙대입구점", category = "일식", grade = 4.8F)
             }
         }
@@ -116,10 +143,12 @@ fun dpToSp(dp: Dp) = with(LocalDensity.current) { dp.toSp() }
 
 @Composable
 fun RestaurantCard(restaurantTitle:String,category:String,grade:Float) {
-    Row(         modifier = Modifier
-        .fillMaxWidth(1f)
-        .height(96.dp),
-        Arrangement.SpaceBetween) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .height(96.dp),
+            Arrangement.SpaceBetween
+    ) {
         Column {
             Text(text=category, fontSize = dpToSp(14.dp), color = TextSub, fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(7.dp))
@@ -138,5 +167,20 @@ fun RestaurantCard(restaurantTitle:String,category:String,grade:Float) {
                 .size(96.dp)){
         }
     }
+}
+
+@Composable
+fun CategoryButton(categoryName:String,onclick:() -> Unit) {
+    OutlinedButton(
+        modifier = Modifier
+            .width(76.dp)
+            .height(35.dp)
+            .background(color = PrimaryColor),
+                shape = RoundedCornerShape(25),
+        onClick = onclick
+    ) {
+        Text(text=categoryName)
+    }
+
 }
 
